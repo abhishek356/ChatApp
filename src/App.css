@@ -1,0 +1,70 @@
+.rootBox {
+  padding:10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items:center;
+  height: 90vh;
+  width:40vw;
+  text-align:center;
+  border: 2px solid black;
+  border-radius: 10px;
+  top: 50%;
+  left:50%;
+  position:absolute;
+  transform: translate(-50%, -50%);
+  padding-bottom:0px;
+}
+.base {
+ border: 2px solid black;
+  height:150%;
+  width:100%;
+
+}
+.inputField {
+  border: 1px solid black;
+  background-color: 'red';
+  width:99.5%;
+  height:80px;
+  padding:0px;
+  display: flex;
+  justify-content:space-between
+}
+
+.inputField textarea{  
+width:83.5%;
+height:95%;
+border : 1px solid green;
+font-size:14px;
+line-height:1.5;
+}
+
+.inputField label{
+  width:120%;
+}
+
+.inputField button{
+height:100%;
+background-color: lightblue;
+width:20%
+}
+
+.inputChatBox {
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.wrap  {
+  flex-basis: 100%;
+}
+
+.messageBox {
+  padding: 5px;
+  margin: 5px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  wrap:wrap;
+  border-radius:5px
+}
