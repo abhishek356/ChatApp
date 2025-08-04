@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {addChatMessage} from '../redux/slice/chatSlice.ts'
 
@@ -8,8 +8,31 @@ import {addChatMessage} from '../redux/slice/chatSlice.ts'
 const InputField: React.FC = () =>{
 const [shouldWrap, setShouldWrap ] = useState(false);
   const [inputValue, setInputValue] = useState('');
-
+  const [socket, setSocket] = useState<WebSocket | null >(null);
   const dispatch = useDispatch();
+
+ useEffect(() => {
+
+   const newSocket = new WebSocket('ws://localhost:3000');
+    newSocket.onopen = () => {
+      console.log('WebSocket connection established');
+      setSocket(newSocket);
+    }
+    if(newSocket){
+     newSocket.onmessage =(message =>{
+     
+console.log("the received message is",message.data);
+      dispatch(addChatMessage(message.data));
+    })
+    }
+    return () => {
+      if(socket){
+        console.log('the socket is holds value and is not closing',socket)
+    socket.close();
+    }
+    }
+  }, []);
+
 
   const handleInputChange = (event) =>  {
 
@@ -29,9 +52,13 @@ const [shouldWrap, setShouldWrap ] = useState(false);
   
     event.preventDefault();
     // const [name, value] = event.target;
+    if(inputValue && socket){ 
 
-    console.log(inputValue);
-    dispatch(addChatMessage(inputValue));
+      socket.send(inputValue)};
+
+   setInputValue('');
+   // console.log(inputValue);
+    //dispatch(addChatMessage(inputValue));
   }
 
   return (
