@@ -61,9 +61,25 @@ console.log("the received message is",message.data);
     //dispatch(addChatMessage(inputValue));
   }
 
+ const handleEnter = (event) =>{
+    window.prompt('the event is triggered',event.key)
+    event.preventDefault();
+  //event.stopPropagation();
+
+  if(event.key === 'Enter' && inputValue.trim() !== ''){
+    if(socket) {
+      socket.send(inputValue);
+      setInputValue('');
+    }
+      else {
+        return;
+      }
+  }
+  }
+
   return (
   <>
-<span className = 'inputField'>
+<span className = 'inputField' onKeyDown = {(event)=> event.key === 'Enter' ? handleEnter(event) : null}>
         <textarea type = 'text' id = 
         "input" placeholder = 'Enter text here' name = 'input' value = {inputValue} 
             onChange = {handleInputChange}
