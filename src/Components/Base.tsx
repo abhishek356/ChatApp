@@ -6,7 +6,7 @@ const chatMessages = useSelector((state:any) => state.chat);
 
   console.log('the messages from the chat are',chatMessages)  ;
 
-return(<div className = 'base'style = {{backgroundColor:'lightblue'}}>
+return(<div className = 'base'style = {{backgroundColor:'lightblue', overflowY:'auto'}}>
  {chatMessages && <div style = {{display:'flex', flexDirection:'column', alignItems:'flex-end'}}>{chatMessages.map((messages,index) => {
 
 return (<div className = 'messageBox'key= {index} style = {{whiteSpace:'normal',wordWrap:'break-word', overflowWrap:'break-word', maxWidth:'300px', textAlign:'left'}}>
